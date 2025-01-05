@@ -1,0 +1,1 @@
+[Flatpak auto update](https://www.jwillikers.com/automate-flatpak-updates-with-systemd)
