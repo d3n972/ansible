@@ -1,0 +1,94 @@
+- name: Dell 5490 setup
+  hosts: 192.168.124.229
+  tasks:
+  - name: Install curl
+    become: true
+    ansible.builtin.dnf:
+      name: curl
+      state: present
+  - name: Install fish shell
+    become: true
+    ansible.builtin.dnf:
+      name: fish
+      state: present
+  - name: Install git
+    become: true
+    ansible.builtin.dnf:
+      name: git
+      state: present
+  - name: Install vim
+    become: true
+    ansible.builtin.dnf:
+      name: vim
+      state: present
+  - name: Install flatpak
+    become: true
+    ansible.builtin.dnf:
+      name: flatpak
+      state: present
+  - name: Install budgie
+    become: true
+    ansible.builtin.dnf:
+      name: budgie-desktop
+      state: present
+  - name: Setup User
+    become: true
+    ansible.builtin.user:
+      name: "d3n"
+      password: "$6$UEVz6/m4BU3yEqpc$litQEySkynyslHINFq2QfjFG9dC5sud/B2d5hGsOips23Lf2l2CpSejQh5NrJL2nx3zuAo88XqK0bZBEAFgod."
+      shell: /usr/bin/fish
+      groups: wheel
+      append: true
+      state: present
+      create_home: true
+  - name: Installl Flathub repository
+    become: true
+    community.general.flatpak_remote:
+      name: flathub
+      state: present
+      flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
+  - name: Install org.gimp.GIMP from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - org.gimp.GIMP
+  - name: Install org.inkscape.Inkscape from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - org.inkscape.Inkscape
+  - name: Install com.spotify.Client from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.spotify.Client
+  - name: Install com.discordapp.Discord from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.discordapp.Discord
+  - name: Install com.google.Chrome from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.google.Chrome
+  - name: Install com.todoist.Todoist from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.todoist.Todoist
+  - name: Install com.valvesoftware.SteamLink from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.valvesoftware.SteamLink
+  - name: Install org.onlyoffice.desktopeditors from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - org.onlyoffice.desktopeditors
+  - name: Install com.github.tchx84.Flatseal from Flathub
+    become: true
+    community.general.flatpak:
+      name:
+      - com.github.tchx84.Flatseal
